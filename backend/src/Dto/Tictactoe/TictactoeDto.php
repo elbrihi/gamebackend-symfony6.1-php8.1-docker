@@ -2,28 +2,15 @@
 
 namespace App\Dto\Tictactoe;
 
-class TictactoeDto
+use App\Dto\Tictactoe\PlayerDtoInterface;
+class TictactoeDto  implements TictactoeDtoInterface
 {
-    private ?string $playerKeyboard ="X";
+
+
 
     private ?array $broad ;
 
-
-    /**
-     * @return string|null
-     */
-    public function getPlayerKeyboard(): ?string
-    {
-        return $this->playerKeyboard;
-    }
-
-    /**
-     * @param string|null $playerKeyboard
-     */
-    public function setPlayerKeyboard(?string $playerKeyboard): void
-    {
-        $this->playerKeyboard = $playerKeyboard;
-    }
+    private ?string $playerKeyboard;
 
     /**
      * @return array|null
@@ -39,6 +26,23 @@ class TictactoeDto
     public function setBroad(?array $broad): void
     {
         $this->broad = $broad;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlayerKeyboard(): ?string
+    {
+        return $this->playerKeyboard;
+    }
+
+    /**
+     * @param string|null $playerKeyboard
+     */
+    public function setPlayerKeyboard(?string $playerKeyboard): void
+    {
+
+        $this->playerKeyboard = $playerKeyboard;
     }
 
 
