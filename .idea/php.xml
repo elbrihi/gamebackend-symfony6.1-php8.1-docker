@@ -103,6 +103,7 @@
       <path value="$PROJECT_DIR$/backend/vendor/symfony/password-hasher" />
       <path value="$PROJECT_DIR$/backend/vendor/willdurand/jsonp-callback-validator" />
       <path value="$PROJECT_DIR$/backend/vendor/willdurand/negotiation" />
+      <path value="$PROJECT_DIR$/backend/vendor/sensio/framework-extra-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
