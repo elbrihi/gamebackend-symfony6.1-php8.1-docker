@@ -3,27 +3,50 @@
 namespace App\Dto\Tictactoe;
 
 use App\Dto\Tictactoe\PlayerDtoInterface;
-class TictactoeDto  implements TictactoeDtoInterface
+class TictactoeDto extends PlayerDto implements TictactoeDtoInterface
 {
 
 
+    private ?array $broads = [];
 
-    private ?array $broad ;
+    private ?string  $broad ='' ;
 
-    private ?string $playerKeyboard;
+    public ?string $currentStateOfTheGame = "notOver";
+
+    public ?string $winner = "";
+
+
 
     /**
      * @return array|null
      */
-    public function getBroad(): ?array
+    public function getBroads(): ?array
     {
-        return $this->broad;
+        return $this->broads;
     }
 
     /**
      * @param array|null $broad
      */
-    public function setBroad(?array $broad): void
+    public function setBroads(?array $broads): void
+    {
+        $this->broads = $broads;
+    }
+
+
+
+    /**
+     * @return string|null
+     */
+    public function getBroad(): ?string
+    {
+        return $this->broad;
+    }
+
+    /**
+     * @param string|null $broad
+     */
+    public function setBroad(?string $broad): void
     {
         $this->broad = $broad;
     }
@@ -31,19 +54,36 @@ class TictactoeDto  implements TictactoeDtoInterface
     /**
      * @return string|null
      */
-    public function getPlayerKeyboard(): ?string
+    public function getCurrentStateOfTheGame(): ?string
     {
-        return $this->playerKeyboard;
+        return $this->currentStateOfTheGame;
     }
 
     /**
-     * @param string|null $playerKeyboard
+     * @param string|null $currentStateOfTheGame
      */
-    public function setPlayerKeyboard(?string $playerKeyboard): void
+    public function setCurrentStateOfTheGame(?string $currentStateOfTheGame): void
     {
-
-        $this->playerKeyboard = $playerKeyboard;
+        $this->currentStateOfTheGame = $currentStateOfTheGame;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getWinner(): ?string
+    {
+        return $this->winner;
+    }
+
+    /**
+     * @param string|null $winner
+     */
+    public function setWinner(?string $winner): void
+    {
+        $this->winner = $winner;
+    }
+
+
 
 
 

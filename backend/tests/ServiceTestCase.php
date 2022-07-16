@@ -2,7 +2,6 @@
 
 namespace App\Tests;
 
-use App\DTO\LowestPriceEnquiry;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

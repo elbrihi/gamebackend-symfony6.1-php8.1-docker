@@ -7,6 +7,7 @@ use App\Dto\Tictactoe\PlayerDto;
 use App\Dto\Tictactoe\PlayerDtoInterface;
 use App\Dto\Tictactoe\TictactoeDto;
 
+use App\Dto\Tictactoe\TictactoeDtoInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 
@@ -29,7 +30,7 @@ class TictactoeManager implements TicTacToeManagerInterface
         $this->newBoard();
     }
 
-    public function playGame(PlayerDtoInterface $playerDto)
+    public function playGame(PlayerDtoInterface $playerDto):TictactoeDtoInterface
     {
         if ($playerDto->getToMove()  === "new_game")
         {
@@ -98,20 +99,6 @@ class TictactoeManager implements TicTacToeManagerInterface
 
     }
 
-    public function toArray($oldArray)
-    {
-        $newArray = [];
-        for ($i = 0 ; $i<sizeof($oldArray);$i++)
-        {
-            for ($j=0 ; $j < sizeof($oldArray[$i]);$j++)
-            {
-                $x = $i."_".$j;
-                $newArray[$x] = $oldArray[$i][$j];
-            }
-        }
-
-        return $newArray ;
-    }
     function newBoard() {
 
 
@@ -167,8 +154,8 @@ class TictactoeManager implements TicTacToeManagerInterface
         if ($this->board[0][2] && $this->board[0][2] == $this->board[1][1] && $this->board[1][1] == $this->board[2][0])
             return $this->board[0][2];
 
-        /*if ($this->totalMoves >= 9)
-            return "Tie";*/
+        if ($this->totalMoves >= 9)
+            return "Tie";
 
 
 

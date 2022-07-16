@@ -14,6 +14,7 @@ class PlayerDto implements PlayerDtoInterface
     #[Assert\NotBlank]
     public ?array $gamedata = [];
 
+    #[Assert\NotBlank]
     private ?string $toMove = "move";
     /**
      * @return string|null

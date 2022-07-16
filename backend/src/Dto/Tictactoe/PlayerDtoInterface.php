@@ -6,8 +6,9 @@ interface PlayerDtoInterface
 {
     public function getPlayerKeyboard(): ?string;
 
-    /**
-     * @param string|null $playerKeyboard
-     */
     public function setPlayerKeyboard(?string $playerKeyboard): void;
+
+    public function getGamedata(): ?array;
+
+    public function setGamedata(?array $gamedata);
 }
