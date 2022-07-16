@@ -52,6 +52,7 @@ class TictactoeManager implements TicTacToeManagerInterface
             $this->newBoard();
             $this->tictactoeDto->setBroads($this->newBoard());
             $this->tictactoeDto->setToMove("move");
+            //$this->playerDto->setPlayerKeyboard("");
             return $this->tictactoeDto;
         }
         $this->board = $playerDto->getGamedata();
