@@ -154,8 +154,8 @@ class TictactoeManager implements TicTacToeManagerInterface
         if ($this->board[0][2] && $this->board[0][2] == $this->board[1][1] && $this->board[1][1] == $this->board[2][0])
             return $this->board[0][2];
 
-        if ($this->totalMoves >= 9)
-            return "Tie";
+        /*if ($this->totalMoves >= 9)
+            return "Tie";*/
 
 
 
