@@ -36,7 +36,7 @@ class ApiGameController extends AbstractController
         $validator)
         {
             try {
-                $session = $this->requestStack->getSession();
+
 
                 $playerDto = $serializer->deserialize( $request->getContent(), PlayerDto::class,'json');
 
@@ -46,11 +46,8 @@ class ApiGameController extends AbstractController
                 {
                     return $this->json($errors, 400);
                 }
-                $this->ticTacToeManager->playGame($playerDto);
 
-                $tictactoe = $serializer->serialize($this->ticTacToeManager->playGame($playerDto), 'json');
-
-                return new Response($tictactoe,200, ['Content-Type' => 'application/json']);
+                return new Response($serializer->serialize($this->ticTacToeManager->playGame($playerDto), 'json'),200, ['Content-Type' => 'application/json']);
             }catch (NotEncodableValueException $e)
             {
                 return $this->json([

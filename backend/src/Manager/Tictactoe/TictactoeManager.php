@@ -32,6 +32,21 @@ class TictactoeManager implements TicTacToeManagerInterface
 
     public function playGame(PlayerDtoInterface $playerDto):TictactoeDtoInterface
     {
+        //$this->session->remove("playerKeyboardToReserve");die;
+
+        if(count($this->getFirstPlayer($playerDto->getGamedata())) === 1)
+        {
+            $player = $this->getFirstPlayer($playerDto->getGamedata());
+
+            foreach ($player as $key=> $firstPlayer)
+            {
+                $this->session->set("playerKeyboardToReserve",$firstPlayer);
+            }
+
+        }
+
+
+
         if ($playerDto->getToMove()  === "new_game")
         {
             $this->newBoard();
@@ -51,49 +66,30 @@ class TictactoeManager implements TicTacToeManagerInterface
 
 
         $this->tictactoeDto->setBroads($playerDto->getGamedata());
-        $this->changePlayerKeyboard($playerDto->getPlayerKeyboard());
+
+        $changedKeyboard = $this->changePlayerKeyboard($this->session->get("playerKeyboardToReserve"));
+
+        $this->session->set("playerKeyboardToReserve",$changedKeyboard);
+
+        $this->tictactoeDto->setPlayerKeyboard($this->session->get("playerKeyboardToReserve"));
 
         return $this->tictactoeDto;
     }
-    private function changePlayerKeyboard(string $playerKeyboard):void
+    private function changePlayerKeyboard(string $playerKeyboard):string
     {
-
-
-        if (!$this->session->has("playerKeyboardToReserve"))
-        {
-
-
-            if ($playerKeyboard === "X")
-            {
-                $this->playerDto->setPlayerKeyboard("O");
-
-            }else{
-                $this->playerDto->setPlayerKeyboard("X");
-
-            }
-
-            $this->session->set("playerKeyboardToReserve",$this->tictactoeDto->getPlayerKeyboard());
-
-            $this->playerKeyboard = $this->tictactoeDto->getPlayerKeyboard();
-
-
-        }
         if ($this->session->has("playerKeyboardToReserve"))
         {
 
-            if ($this->session->get("playerKeyboardToReserve") === "X")
+            if ($playerKeyboard === "X")
             {
+                return "O";
 
-                $this->tictactoeDto->setPlayerKeyboard("O");
 
             }else{
 
-                $this->tictactoeDto->setPlayerKeyboard("X");
-
+                return "X";
 
             }
-            $this->session->set("playerKeyboardToReserve",$this->tictactoeDto->getPlayerKeyboard());
-            $this->playerKeyboard = $this->tictactoeDto->getPlayerKeyboard();
         }
 
 
@@ -103,22 +99,42 @@ class TictactoeManager implements TicTacToeManagerInterface
 
 
 
-        $this->board = array();
+        $board = array();
         //create the board
         for ($x = 0; $x <= 2; $x++)
         {
             for ($y = 0; $y <= 2; $y++)
             {
-                $this->board[$x][$y] = "";
+                $board[$x][$y] = "";
             }
         }
-        return $this->board;
 
-
+        return $board;
 
     }
 
+    public function getFirstPlayer($oldArray)
+    {
+        $newArray = [];
+        for ($i = 0 ; $i<sizeof($oldArray);$i++)
+        {
+            for ($j=0 ; $j < sizeof($oldArray[$i]);$j++)
+            {
+                $x = $i."_".$j;
+                $newArray[$x] = $oldArray[$i][$j];
+            }
+        }
 
+
+        $result = array_filter($newArray);
+        return $result ;
+
+    }
+
+    public function getKey()
+    {
+        return $this->playerKeyboard ;
+    }
 
     private function isOver()
     {
