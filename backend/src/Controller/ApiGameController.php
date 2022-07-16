@@ -30,35 +30,63 @@ class ApiGameController extends AbstractController
         {
         }
 
-        #[Rest\View()]
-        #[Rest\Post("take/turn",name: "api_take_turn")]
+
+        #[Rest\Post("play/game",name: "api_play_game")]
         public function playGame(DtoSerializer $serializer, Request $request, ValidatorInterface
         $validator)
         {
-            try {
-
 
                 $playerDto = $serializer->deserialize( $request->getContent(), PlayerDto::class,'json');
 
-                $errors = $validator->validate($playerDto);
-
-                if (count($errors) > 0)
-                {
-                    return $this->json($errors, 400);
-                }
 
                 return new Response($serializer->serialize($this->ticTacToeManager->playGame($playerDto), 'json'),200, ['Content-Type' => 'application/json']);
-            }catch (NotEncodableValueException $e)
-            {
-                return $this->json([
-                    'status' => 400,
-                    'message' => $e->getMessage()
-                ],400);
-            }
-
-
 
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*#[Rest\Post("play/game",name: "api_play_game")]
+     public function playGame(DtoSerializer $serializer, Request $request, ValidatorInterface
+     $validator)
+     {
+         try {
+
+
+             $playerDto = $serializer->deserialize( $request->getContent(), PlayerDto::class,'json');
+
+             $errors = $validator->validate($playerDto);
+
+             if (count($errors) > 0)
+             {
+
+                 return $this->json($errors, 400);
+
+             }
+
+             return new Response($serializer->serialize($this->ticTacToeManager->playGame($playerDto), 'json'),200, ['Content-Type' => 'application/json']);
+         }catch (NotEncodableValueException $e)
+         {
+             return $this->json([
+                 'status' => 400,
+                 'message' => $e->getMessage()
+             ],400);
+         }
+
+
+
+     }*/
 }

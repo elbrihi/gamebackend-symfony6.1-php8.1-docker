@@ -10,11 +10,14 @@ use Symfony\Component\Validator\Exception\ValidationFailedException;
 
 class DtoSubscriberTest extends ServiceTestCase
 {
-        public function testA_dto_is_validated_after_has_been_created()
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function testA_dto_is_validated_after_has_been_created()
         {
             $dto = new PlayerDto();
 
-            //$dto->setGamedata([]);
             $dto->setPlayerKeyboard("");
             $event = new AfterDtoCreatedEvent($dto);
 
@@ -26,6 +29,6 @@ class DtoSubscriberTest extends ServiceTestCase
 
             $this->expectExceptionMessage("This value should not be blank.");
 
-            $eventDispatcher->dispatch($event);
+            $eventDispatcher->dispatch($event, $event::NAME);
         }
 }

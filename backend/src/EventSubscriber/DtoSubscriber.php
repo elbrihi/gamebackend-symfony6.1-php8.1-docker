@@ -16,7 +16,7 @@ class DtoSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents():array
     {
         return [
-            AfterDtoCreatedEvent::NAME
+            AfterDtoCreatedEvent::NAME => 'validateDto'
         ];
     }
 

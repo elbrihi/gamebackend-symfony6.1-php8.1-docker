@@ -16,27 +16,8 @@ $ composer install
 tape http://localhost:8182/api/take/turn
 
 Player "X" OR "O" send data can sent this data   
-{
-"toMove": "new_game",
-"gamedata": [
-        [
-            "X",
-            "",
-            ""
-        ],
-        [
-            "",
-            "",
-            ""
-        ],
-        [
-            "",
-            "",
-            ""
-        ]
+{"toMove": "new_game","gamedata": [["X","",""],["","",""],["","",""]]}
 
-    ]
-}
 
 
 
@@ -146,5 +127,4 @@ then you will get broads totally empty
     "to_move": "move"
 }
 
-
-
+1.3  the validation input should the "toMove" be not blank 
