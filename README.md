@@ -100,7 +100,7 @@ based at this informations player "O" can create his own json response like that
             ]        
         }
 
-2.3  the validation and unit testing,
+2.2  the validation and unit testing,
 
 the input should the "toMove" be not blank  and should have two choices "new_game" or "move"
 
@@ -178,7 +178,7 @@ you recieve json response at this format
 
 
 
-2.4) The end the game  
+2.3) The end the game  
     when one of player "O" or "X" wins for exemple "X", we will receive json responde format
         
         {
@@ -212,7 +212,7 @@ you recieve json response at this format
 
 the game is over and if you want to strat new game  and winner X
 
-2.5) starting new game :
+2.4) starting new game :
    
 starting the new game based of the ending of game copie new_game from the last json response and pass it to json request like that 
 
