@@ -15,6 +15,7 @@ class PlayerDto implements PlayerDtoInterface
     public ?array $gamedata = [];
 
     #[Assert\NotBlank]
+    #[Assert\Choice(["move","new_game"],message: "this field should to take two choices move or new_game")]
     private ?string $toMove = "move";
     /**
      * @return string|null

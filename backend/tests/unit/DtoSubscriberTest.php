@@ -18,7 +18,9 @@ class DtoSubscriberTest extends ServiceTestCase
         {
             $dto = new PlayerDto();
 
-            $dto->setPlayerKeyboard("");
+            $dto->setToMove("");
+
+            $dto->setToMove("nothing");
             $event = new AfterDtoCreatedEvent($dto);
 
             /*** @var EventDispatcherInterface $eventDispatcher **/
@@ -28,6 +30,10 @@ class DtoSubscriberTest extends ServiceTestCase
             $this->expectException(ValidationFailedException::class);
 
             $this->expectExceptionMessage("This value should not be blank.");
+
+
+            $this->expectExceptionMessage("this field should to take two choices move or new_game");
+
 
             $eventDispatcher->dispatch($event, $event::NAME);
         }

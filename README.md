@@ -158,17 +158,75 @@ starting the new game based of the ending of game copie new_game from the last j
             ]        
         }
 
-1.3  the validation and unit testing with phpunit, the input should the "toMove" be not blank 
+1.3  the validation and unit testing, 
+
+the input should the "toMove" be not blank  and should have two choices "new_game" or "move"
 
             $ docker-compose exec php bash
 
             php vendor/bin/phpunit tests/unit/DtoSubscriberTest.php
 
-you will be recieve this data as json request
+in your postman
+
+if you send this data of player with empty toMove
+
+    {
+        "toMove": "",
+        "gamedata": [
+            [
+            "X",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ]
+        ]        
+    }
+
+you will  recieve this data as json request
 
 
 
     {
         "code": 500,
         "message": "Object(App\\Dto\\Tictactoe\\PlayerDto).toMove:\n    This value should not be blank. (code c1051bb4-d103-4f74-8988-acbcafc7fdc3)\n"
+    }
+
+in the case :
+
+
+    {
+        "toMove": "nothing",
+        "gamedata": [
+            [
+            "X",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ]
+        ]        
+    } 
+
+you recieve json response at this format 
+
+    {
+        "code": 500,
+        "message": "Object(App\\Dto\\Tictactoe\\PlayerDto).toMove:\n    this field should to take two choices move or new_game (code 8e179f1b-97aa-4560-a02f-2a8b42e49df7)\n"
     }
