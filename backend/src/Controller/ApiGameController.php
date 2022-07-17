@@ -32,14 +32,13 @@ class ApiGameController extends AbstractController
 
 
         #[Rest\Post("play/game",name: "api_play_game")]
-        public function playGame(DtoSerializer $serializer, Request $request, ValidatorInterface
-        $validator)
+        public function playGame(DtoSerializer $serializer, Request $request)
         {
 
                 $playerDto = $serializer->deserialize( $request->getContent(), PlayerDto::class,'json');
 
-
                 $playerDto = $serializer->serialize($this->ticTacToeManager->playGame($playerDto), 'json');
+
                 return new Response( $playerDto,200, ['Content-Type' => 'application/json']);
 
         }

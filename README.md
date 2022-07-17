@@ -47,8 +47,8 @@ row of three Xs or three Os before the opponent does
         }
 
 
-    the second step the server will send json response that content a user ( "player_keyboard": "O" )   has made a move , display the current state "NotOver"  of the game,
-    and the matrix of broads like this exemple.
+   the second step the server will send json response that content a user ( "player_keyboard": "O" )   has made a move , display the current state "NotOver"  of the game,
+   and the matrix of broads like this exemple.
       
         {
             "broads": [
@@ -99,7 +99,86 @@ based at this informations player "O" can create his own json response like that
                 ]
             ]        
         }
-1-2 ) The end the game  
+
+2.3  the validation and unit testing,
+
+the input should the "toMove" be not blank  and should have two choices "new_game" or "move"
+
+            $ docker-compose exec php bash
+
+            php vendor/bin/phpunit tests/unit/DtoSubscriberTest.php
+
+
+in your postman
+
+if you send this data of player with empty toMove
+
+
+    {
+        "toMove": "",
+        "gamedata": [
+            [
+            "X",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ]
+        ]        
+    }
+
+you will  receive this data as json request
+
+
+    {
+        "code": 500,
+        "message": "Object(App\\Dto\\Tictactoe\\PlayerDto).toMove:\n    This value should not be blank. (code c1051bb4-d103-4f74-8988-acbcafc7fdc3)\n"
+    }
+
+
+in the case toMove take other value:
+
+
+    {
+        "toMove": "nothing",
+        "gamedata": [
+            [
+            "X",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ],
+            [
+            "",
+            "",
+            ""
+            ]
+        ]        
+    } 
+
+you recieve json response at this format
+
+    {
+        "code": 500,
+        "message": "Object(App\\Dto\\Tictactoe\\PlayerDto).toMove:\n    this field should to take two choices "move" or "new_game" (code 8e179f1b-97aa-4560-a02f-2a8b42e49df7)\n"
+    }
+
+
+
+
+2.4) The end the game  
     when one of player "O" or "X" wins for exemple "X", we will receive json responde format
         
         {
@@ -133,7 +212,7 @@ based at this informations player "O" can create his own json response like that
 
 the game is over and if you want to strat new game  and winner X
 
-1.4 ) starting new game :
+2.5) starting new game :
    
 starting the new game based of the ending of game copie new_game from the last json response and pass it to json request like that 
 
@@ -191,7 +270,7 @@ if you send this data of player with empty toMove
         ]        
     }
 
-you will  recieve this data as json request
+you will  receive this data as json request
 
 
 
