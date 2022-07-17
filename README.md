@@ -38,7 +38,7 @@ The first step a player "X" OR "O" is going to do  is to send this information a
         ]
     ]        
 }
-
+.
 the second step the server will send json response that content a user ( "player_keyboard": "O" )   has made a move , display the current state "NotOver"  of the game,  and the matrix of broads like this exemple 
 
 {
