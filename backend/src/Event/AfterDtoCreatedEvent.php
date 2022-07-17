@@ -2,7 +2,6 @@
 
 namespace App\Event;
 
-use App\Dto\Tictactoe\PlayerDto;
 use App\Dto\Tictactoe\PlayerDtoInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
